@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>MS_FOOTIES</title>
+<!-- Favicon: Added a simple link tag; you can replace the href with a link to your own logo icon -->
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135755.png">
+<style>
+    body { margin: 0; font-family: Arial; background: #fff; color: #111; }
+    .page { display: none; padding: 20px; }
+    .show { display: block; }
+    
+    h1 { text-align: center; color: #ff0000; } 
+    h2 { text-align: center; color: #111; }
+    
+    .btn { display: block; width: 90%; max-width: 320px; margin: 16px auto; padding: 12px; border: none; border-radius: 8px; background: #ff9800; color: #111; font-weight: bold; cursor: pointer; }
+    
+    .cat-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 10px; border: 3px solid #ff9800; }
+    
+    .card { background: #111; border-radius: 12px; padding: 12px; margin: 14px auto; max-width: 360px; }
+    .card img { width: 100%; border-radius: 10px; }
+    .card h3 { color: #fff; text-align: center; } 
+    
+    input { width: 100%; padding: 10px; margin: 6px 0; border-radius: 8px; border: 1px solid #555; box-sizing: border-box; }
+    
+    .small-btn { width: auto; padding: 8px 16px; margin: 0 auto 20px; display: table; font-size: 14px; }
+
+    .info-bar { text-align: center; font-size: 14px; color: #555; margin: 20px 0; }
+    .wa-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 15px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.3); z-index: 1000; }
+
+    /* Footer Styles */
+    footer { text-align: center; padding: 20px; color: #777; font-size: 12px; border-top: 1px solid #eee; margin-top: 30px; }
+    
+    /* Loading Spinner */
+    .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #ff0000; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 20px auto; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<a href='https://wa.me/233246862603' class='wa-float' target='_blank'>WhatsApp</a>
+
+<div id='home' class='page show'>
+    <h1>MS_FOOTIES</h1>
+    <div class='info-bar'>
+        ⚡ Fast Delivery &nbsp; | &nbsp; 📦 Easy Ordering &nbsp; | &nbsp; 🎧 Customer Support
+    </div>
+    <img src='https://i.postimg.cc/dVB2wQRb/images-(1).jpg' class='cat-img'>
+    <button class='btn' onclick="openCol('men')">MEN'S COLLECTION</button>
+    <img src='https://i.postimg.cc/pLqF3GxJ/images-(2).jpg' class='cat-img'>
+    <button class='btn' onclick="openCol('women')">WOMEN'S COLLECTION</button>
+</div>
+
+<div id='collection' class='page'>
+    <button class='btn small-btn' onclick='backHome()'>BACK</button>
+    <h2 id='title'></h2>
+    <div id='list'></div>
+</div>
+
+<div id='order' class='page'>
+    <h2>Place Order</h2>
+    <input id='name' placeholder='Name'>
+    <input id='loc' placeholder='Location'>
+    <input id='phone' placeholder='Phone Number'>
+    <input id='size' placeholder='Foot Size'>
+    <input id='qty' type='number' value='1' min='1'>
+    <button class='btn' onclick='send()'>Place Order</button>
+    <button class='btn small-btn' onclick='backCol()'>BACK</button>
+</div>
+
+<footer>
+    <p>⏰ Business Hours: Monday – Sunday, 8:00 AM – 10:00 PM</p>
+    <p>&copy; 2026 MS_FOOTIES. All rights reserved.</p>
+</footer>
+
+<script>
+const num='233246862603';let current,col;
+const men=[['70','https://i.postimg.cc/gj6KqDHC/IMG-20260716-WA0017.jpg'],['80','https://i.postimg.cc/W1VQzF2P/IMG-20260716-WA0009.jpg'],['80','https://i.postimg.cc/bwPKrDzf/IMG-20260716-WA0010.jpg'],['80','https://i.postimg.cc/XYWTqGVW/IMG-20260716-WA0011.jpg'],['80','https://i.postimg.cc/Jz890DRv/IMG-20260716-WA0012.jpg'],['80','https://i.postimg.cc/x1QW8J0j/IMG-20260716-WA0013.jpg'],['80','https://i.postimg.cc/4xGry7Jg/IMG-20260716-WA0014.jpg'],['80','https://i.postimg.cc/t4bLJZXq/IMG-20260716-WA0015.jpg'],['80','https://i.postimg.cc/bwPKrDzw/IMG-20260716-WA0016.jpg'],['90','https://i.postimg.cc/HsDNvc83/IMG-20260716-WA0004.jpg'],['90','https://i.postimg.cc/dt2xbsGn/IMG-20260716-WA0006.jpg'],['90','https://i.postimg.cc/KvPH6Gt0/IMG-20260716-WA0007.jpg'],['100','https://i.postimg.cc/X7ks220m/IMG-20260716-WA0018.jpg'],['100','https://i.postimg.cc/yYyLffz5/IMG-20260716-WA0019.jpg'],['100','https://i.postimg.cc/VLWK77cH/IMG-20260716-WA0020.jpg'],['120','https://i.postimg.cc/vTLtNmCx/IMG-20260716-WA0021.jpg'],['120','https://i.postimg.cc/sx94N2bB/IMG-20260716-WA0022.jpg'],['120','https://i.postimg.cc/wMcQGBny/IMG-20260716-WA0023.jpg'],['120','https://i.postimg.cc/rsCNPp7W/IMG-20260716-WA0024.jpg'],['120','https://i.postimg.cc/D0dPMzR8/IMG-20260716-WA0025.jpg'],['120','https://i.postimg.cc/1XZKBF7w/IMG-20260716-WA0026.jpg']];
+const women=[['40','https://i.postimg.cc/XYypjPY3/IMG-20260716-WA0008.jpg'],['50','https://i.postimg.cc/SQvSnG5R/IMG-20260716-WA0003.jpg'],['50','https://i.postimg.cc/pX52zFbr/IMG-20260716-WA0005.jpg'],['90','https://i.postimg.cc/28Nzd5kp/IMG-20260716-WA0027.jpg'],['100','https://i.postimg.cc/cL9yz1SW/IMG-20260716-WA0028.jpg']];
+
+function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));document.getElementById(id).classList.add('show')}
+function openCol(c){col=c;let arr=c=='men'?men:women;title.textContent=c=="men"?"MEN'S COLLECTION":"WOMEN'S COLLECTION";list.innerHTML='<div class="spinner"></div>';setTimeout(()=>{list.innerHTML='';arr.forEach(p=>{list.innerHTML+=`<div class=card><img src='${p[1]}'><h3>GHS ${p[0]}</h3><button class=btn onclick="buy('${p[0]}','${p[1]}')">BUY</button></div>`})},500);show('collection')}
+function buy(price,img){current={price,img};show('order')}
+function backHome(){show('home')} function backCol(){show('collection')}
+function send(){let t=`🛍️ NEW ORDER - MS_FOOTIES
+
+Price: GHS ${current.price}
+Name: ${name.value}
+Location: ${loc.value}
+Phone: ${phone.value}
+Foot Size: ${size.value}
+Quantity: ${qty.value}
+Product Image: ${current.img}`;window.open('https://wa.me/'+num+'?text='+encodeURIComponent(t),'_blank')}
+</script>
+</body>
+</html>
